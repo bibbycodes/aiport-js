@@ -1,5 +1,6 @@
 describe("Airport", function () {
   beforeEach(function() {
+    planeSpy = jasmine.createSpyObj('plane', ['land', 'takeOff'])
     plane = new Plane()
     airport = new Airport()
   })
@@ -8,17 +9,25 @@ describe("Airport", function () {
     for(i = 0; i < 10; i++) {
       plane.land(airport)
     }
-    expect( function () { plane.land(airport) }).toThrow(new Error("Airport at capacity!"))
+    expect(plane.land(airport)).toEqual("Can't land! Aiport full!")
   })
 
   it("can take off from an airport", function() {
     plane.land(airport)
-    airport.takeOff(plane)
+    plane.takeOff(airport)
     expect(airport.hangar).not.toContain(plane)
     })
 
   it("contains a plane when a plane lands", function () {
     plane.land(airport)
     expect(airport.hangar).toContain(plane)
+  })
+
+  it("has a capacity of 10", function () {
+    expect(airport.capacity).toEqual(10)
+  })
+
+  it("has an empty hanagr", function() {
+    expect(airport.hangar).toEqual([])
   })
 })

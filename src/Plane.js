@@ -4,14 +4,13 @@ function Plane () {
 
 Plane.prototype.land = function(airport) {
   if (airport.hasSpace()) {
-    airport.hangar.push(plane)
+    airport.addPlaneToHangar(this)
     return airport
   } else {
-    return "Cannot land!"
+    return "Can't land! Aiport full!"
   }
 }
 
-Plane.prototype.take_off = function(airport) {
-  index = airport.hangar.indexOf(this)
-  airport.hangar.splice(index, 1)
+Plane.prototype.takeOff = function(airport) {
+  airport.removePlaneFromHangar(this)
 }
