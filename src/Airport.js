@@ -9,9 +9,12 @@ function Airport() {
 // }
 
 Airport.prototype.hasSpace = function() {
-  if (this.hangar.length >= this.capacity) {
+  if (this.getHangar.length >= this.capacity) {
     return false
   } else {
     return true
   }
+}
+Airport.prototype.getHangar = function() {
+  return this.hangar
 }
